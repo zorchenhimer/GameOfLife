@@ -1,7 +1,9 @@
 #include "Life.h"
+#include <random>
 
 Life::Life() {
-	srand(time(NULL));
+	std::random_device rd;
+	std::mt19937_64 gen(rd());
 
 	this->WorldGrid = new bool*[GRID_HEIGHT];
 	for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -15,8 +17,8 @@ Life::Life() {
 
 	for (int x = 0; x < GRID_HEIGHT; x++) {
 		for (int y = 0; y < GRID_WIDTH; y++) {
-			int r = rand() % 100 + 1;
-			if (r % 2 == false)
+			int r = gen();
+			if (r % 10 == false)
 				this->WorldGrid[x][y] = true;
 			else
 				this->WorldGrid[x][y] = false;
